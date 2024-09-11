@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Patient Data Input</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        fieldset {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        legend {
+            font-weight: bold;
+            padding: 0 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+        #results {
+            margin-top: 20px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (min-width: 768px) {
+            .form-group {
+                display: inline-block;
+                width: calc(50% - 10px);
+                margin-right: 10px;
+            }
+            
+            .form-group:nth-child(even) {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Comprehensive Patient Data Input</h1>
+        <form id="patientForm" method="POST" action="/predict">
+            <fieldset>
+                <legend>Basic Information</legend>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="Age" required>
+                    <!-- Age in years -->
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="Gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <!-- Male or Female -->
+                </div>
+                <div class="form-group">
+                    <label for="height">Height (cm):</label>
+                    <input type="number" id="height" name="Height" step="0.1" required>
+                    <!-- Height in cm -->
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" name="Weight" step="0.1" required>
+                    <!-- Weight in kg -->
+                </div>
+                <div class="form-group">
+                    <label for="bmi">BMI:</label>
+                    <input type="number" id="bmi" name="BMI" step="0.01" required>
+                    <!-- Body Mass Index -->
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Blood Pressure</legend>
+                <div class="form-group">
+                    <label for="systolic_bp">Systolic BP (mmHg):</label>
+                    <input type="number" id="systolic_bp" name="Systolic_BP" required>
+                    <!-- Systolic Blood Pressure in mmHg -->
+                </div>
+                <div class="form-group">
+                    <label for="diastolic_bp">Diastolic BP (mmHg):</label>
+                    <input type="number" id="diastolic_bp" name="Diastolic_BP" required>
+                    <!-- Diastolic Blood Pressure in mmHg -->
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Cholesterol</legend>
+                <div class="form-group">
+                    <label for="cholesterol_total">Total Cholesterol (mg/dL):</label>
+                    <input type="number" id="cholesterol_total" name="Cholesterol_Total" required>
+                    <!-- Total Cholesterol in mg/dL -->
+                </div>
+                <div class="form-group">
+                    <label for="cholesterol_hdl">HDL Cholesterol (mg/dL):</label>
+                    <input type="number" id="cholesterol_hdl" name="Cholesterol_HDL" required>
+                    <!-- HDL Cholesterol in mg/dL -->
+                </div>
+                <div class="form-group">
+                    <label for="cholesterol_ldl">LDL Cholesterol (mg/dL):</label>
+                    <input type="number" id="cholesterol_ldl" name="Cholesterol_LDL" required>
+                    <!-- LDL Cholesterol in mg/dL -->
+                </div>
+                <div class="form-group">
+                    <label for="triglycerides">Triglycerides (mg/dL):</label>
+                    <input type="number" id="triglycerides" name="Triglycerides" required>
+                    <!-- Triglycerides in mg/dL -->
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Diabetes Indicators</legend>
+                <div class="form-group">
+                    <label for="blood_glucose_fasting">Fasting Blood Glucose (mg/dL):</label>
+                    <input type="number" id="blood_glucose_fasting" name="Blood_Glucose_Fasting" required>
+                    <!-- Fasting Blood Glucose in mg/dL -->
+                </div>
+                <div class="form-group">
+                    <label for="hba1c">HbA1c (%):</label>
+                    <input type="number" id="hba1c" name="HbA1c" step="0.1" required>
+                    <!-- Hemoglobin A1c percentage -->
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Lifestyle Factors</legend>
+                <div class="form-group">
+                    <label for="smoking_status">Smoking Status:</label>
+                    <select id="smoking_status" name="Smoking_Status" required>
+                        <option value="Never">Never</option>
+                        <option value="Former">Former</option>
+                        <option value="Current">Current</option>
+                    </select>
+                    <!-- Never, Former, or Current -->
+                </div>
+                <div class="form-group">
+                    <label for="alcohol_consumption">Alcohol Consumption:</label>
+                    <select id="alcohol_consumption" name="Alcohol_Consumption" required>
+                        <option value="None">None</option>
+                        <option value="Light">Light</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="Heavy">Heavy</option>
+                    </select>
+                    <!-- None, Light, Moderate, or Heavy -->
+                </div>
+                <div class="form-group">
+                    <label for="physical_activity">Physical Activity:</label>
+                    <select id="physical_activity" name="Physical_Activity" required>
+                        <option value="None">None</option>
+                        <option value="Light">Light</option>
+                        <option value="Moderate">Moderate</option>
+                        <option value="High">High</option>
+                    </select>
+                    <!-- None, Light, Moderate, or High -->
+                </div>
+                <div class="form-group">
+                    <label for="stress_level">Stress Level:</label>
+                    <select id="stress_level" name="Stress_Level" required>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                    <!-- Low, Medium, or High -->
+                </div>
+                <div class="form-group">
+                    <label for="sleep_hours">Sleep Hours:</label>
+                    <input type="number" id="sleep_hours" name="Sleep_Hours" step="0.5" required>
+                    <!-- Average hours of sleep per night -->
+                </div>
+                <div class="form-group">
+                    <label for="fruits_veggies_daily">Daily Fruits & Vegetables Intake:</label>
+                    <input type="number" id="fruits_veggies_daily" name="Fruits_Veggies_Daily" step="0.5" required>
+                    <!-- Number of servings of fruits/vegetables per day -->
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Family History</legend>
+                <div class="form-group">
+                    <label for="family_history_cvd">Family History of CVD:</label>
+                    <input type="number" id="family_history_cvd" name="Family_History_CVD" min="0" max="1" required>
+                    <!-- 1 if there is a family history of cardiovascular disease, 0 otherwise -->
+                </div>
+                <div class="form-group">
+                    <label for="family_history_diabetes">Family History of Diabetes:</label>
+                    <input type="number" id="family_history_diabetes" name="Family_History_Diabetes" min="0" max="1" required>
+                    <!-- 1 if there is a family history of diabetes, 0 otherwise -->
+                </div>
+                <div class="form-group">
+                    <label for="family_history_cancer">Family History of Cancer:</label>
+                    <input type="number" id="family_history_cancer" name="Family_History_Cancer" min="0" max="1" required>
+                    <!-- 1 if there is a family history of cancer, 0 otherwise -->
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Additional Blood Tests</legend>
+                <div class="form-group">
+                    <label for="creatinine">Creatinine (mg/dL):</label>
+                    <input type="number" id="creatinine" name="Creatinine" step="0.1" required>
+                    <!-- Serum Creatinine in mg/dL -->
+                </div>
+                <div class="form-group">
+                    <label for="egfr">eGFR (mL/min/1.73m2):</label>
+                    <input type="number" id="egfr" name="eGFR" required>
+                    <!-- Estimated Glomerular Filtration Rate in mL/min/1.73m2 -->
+                </div>
+                <div class="form-group">
+                    <label for="alt">ALT (U/L):</label>
+                    <input type="number" id="alt" name="ALT" required>
+                    <!-- Alanine Aminotransferase in U/L -->
+                </div>
+                <div class="form-group">
+                    <label for="ast">AST (U/L):</label>
+                    <input type="number" id="ast" name="AST" required>
+                    <!-- Aspartate Aminotransferase in U/L -->
+                </div>
+                <div class="form-group">
+                    <label for="tsh">TSH (mIU/L):</label>
+                    <input type="number" id="tsh" name="TSH" step="0.1" required>
+                    <!-- Thyroid Stimulating Hormone in mIU/L -->
+                </div>
+                <div class="form-group">
+                    <label for="t4">T4 (ng/dL):</label>
+                    <input type="number" id="t4" name="T4" step="0.1" required>
+                    <!-- Free Thyroxine in ng/dL -->
+                </div>
+                <div class="form-group">
+                    <label for="vitamin_d">Vitamin D (ng/mL):</label>
+                    <input type="number" id="vitamin_d" name="Vitamin_D" required>
+                    <!-- Vitamin D in ng/mL -->
+                </div>
+                <div class="form-group">
+                    <label for="calcium">Calcium (mg/dL):</label>
+                    <input type="number" id="calcium" name="Calcium" step="0.1" required>
+                    <!-- Serum Calcium in mg/dL -->
+                </div>
+                <div class="form-group">
+                    <label for="hemoglobin">Hemoglobin (g/dL):</label>
+                    <input type="number" id="hemoglobin" name="Hemoglobin" step="0.1" required>
+                    <!-- Hemoglobin in g/dL -->
+                </div>
+                <div class="form-group">
+                    <label for="white_blood_cell_count">White Blood Cell Count (10^3 cells/uL):</label>
+                    <input type="number" id="white_blood_cell_count" name="White_Blood_Cell_Count" step="0.1" required>
+                    <!-- White Blood Cell Count in 10^3 cells/uL -->
+                </div>
+                <div class="form-group">
+                    <label for="platelet_count">Platelet Count (10^3 cells/uL):</label>
+                    <input type="number" id="platelet_count" name="Platelet_Count" required>
+                    <!-- Platelet Count in 10^3 cells/uL -->
+                </div>
+                <div class="form-group">
+                    <label for="c_reactive_protein">C-Reactive Protein (mg/L):</label>
+                    <input type="number" id="c_reactive_protein" name="C_Reactive_Protein" step="0.1" required>
+                    <!-- C-Reactive Protein in mg/L -->
+                </div>
+                <div class="form-group">
+                    <label for="vitamin_b12">Vitamin B12 (pg/mL):</label>
+                    <input type="number" id="vitamin_b12" name="Vitamin_B12" required>
+                    <!-- Vitamin B12 in pg/mL -->
+                </div>
+                <div class="form-group">
+                    <label for="folate">Folate (ng/mL):</label>
+                    <input type="number" id="folate" name="Folate" step="0.1" required>
+                    <!-- Folate in ng/mL -->
+                </div>
+                <div class="form-group">
+                    <label for="ferritin">Ferritin (ng/mL):</label>
+                    <input type="number" id="ferritin" name="Ferritin" required>
+                    <!-- Ferritin in ng/mL -->
+                </div>
+                <div class="form-group">
+                    <label for="uric_acid">Uric Acid (mg/dL):</label>
+                    <input type="number" id="uric_acid" name="Uric_Acid" step="0.1" required>
+                    <!-- Uric Acid in mg/dL -->
+                </div>
+                <div class="form-group">
+                    <label for="psa">PSA (ng/mL):</label>
+                    <input type="number" id="psa" name="PSA" step="0.1" required>
+                    <!-- Prostate-Specific Antigen in ng/mL (for males) -->
+                </div>
+                <div class="form-group">
+                    <label for="bone_density_t_score">Bone Density T-Score:</label>
+                    <input type="number" id="bone_density_t_score" name="Bone_Density_T_Score" step="0.1" required>
+                    <!-- Bone Density T-Score -->
+                </div>
+            </fieldset>
+
+            <button type="submit">Predict Risk</button>
+        </form>
+        <div id="results"></div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
